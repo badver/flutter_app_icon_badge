@@ -1,0 +1,22 @@
+PODS:
+  - flutter_app_icon_badge (0.0.1):
+    - FlutterMacOS
+  - FlutterMacOS (1.0.0)
+
+DEPENDENCIES:
+  - flutter_app_icon_badge (from `Flutter/ephemeral/.symlinks/plugins/flutter_app_icon_badge/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
+
+EXTERNAL SOURCES:
+  flutter_app_icon_badge:
+    :path: Flutter/ephemeral/.symlinks/plugins/flutter_app_icon_badge/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+
+SPEC CHECKSUMS:
+  flutter_app_icon_badge: 099b018a4b36109fb73874411fb4e8b5febac20e
+  FlutterMacOS: 57701585bf7de1b3fc2bb61f6378d73bbdea8424
+
+PODFILE CHECKSUM: 6eac6b3292e5142cfc23bdeb71848a40ec51c14c
+
+COCOAPODS: 1.10.1
