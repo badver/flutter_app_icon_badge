@@ -23,6 +23,8 @@ public class FlutterAppIconBadgePlugin: NSObject, FlutterPlugin {
           result(nil)
         case "isAppBadgeSupported":
           result(true)
+        case "isAppFocused":
+          result(NSApplication.shared.isActive)
         default:
           result(FlutterMethodNotImplemented)
     }

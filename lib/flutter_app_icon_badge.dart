@@ -18,4 +18,9 @@ class FlutterAppIconBadge {
     bool appBadgeSupported = await _channel.invokeMethod('isAppBadgeSupported');
     return appBadgeSupported;
   }
+
+  static Future<bool> isAppFocused() async {
+    bool isAppFocused = await _channel.invokeMethod('isAppFocused');
+    return isAppFocused;
+  }
 }

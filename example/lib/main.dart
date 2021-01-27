@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_icon_badge/flutter_app_icon_badge.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
   @override
-  _MyAppState createState() => new _MyAppState();
+  _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   String _appBadgeSupported = 'Unknown';
+  bool _isFocused = true;
 
   @override
   initState() {
@@ -43,28 +44,41 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
-      home: new Scaffold(
-        appBar: new AppBar(
-          title: new Text('Plugin example app'),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Plugin example app'),
         ),
-        body: new SizedBox.expand(
-          child: new Column(
+        body: SizedBox.expand(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              new Text('Badge supported: $_appBadgeSupported\n'),
-              new RaisedButton(
-                child: new Text('Add badge'),
+              Text('Badge supported: $_appBadgeSupported'),
+              Text('Focused: $_isFocused'),
+              RaisedButton(
+                child: Text('Add badge'),
                 onPressed: () {
                   _addBadge();
                 },
               ),
-              new RaisedButton(
-                  child: new Text('Remove badge'),
-                  onPressed: () {
-                    _removeBadge();
-                  }),
+              RaisedButton(
+                child: Text('Remove badge'),
+                onPressed: () {
+                  _removeBadge();
+                },
+              ),
+              RaisedButton(
+                child: Text('Check focus after 5 seconds'),
+                onPressed: () {
+                  Future.delayed(Duration(seconds: 5), () async {
+                    final isFocused = await FlutterAppIconBadge.isAppFocused();
+                    setState((){
+                      _isFocused = isFocused;
+                    });
+                  });
+                },
+              ),
             ],
           ),
         ),
