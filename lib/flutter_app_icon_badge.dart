@@ -6,13 +6,13 @@ class FlutterAppIconBadge {
   static const MethodChannel _channel = const MethodChannel('flutter_app_icon_badge');
 
   /// Change badge on app icon
-  static void updateBadge(int count) {
-    _channel.invokeMethod('updateBadge', {"count": count});
+  static Future<void> updateBadge(int count) async {
+    await _channel.invokeMethod('updateBadge', {"count": count});
   }
 
   /// Remove badge on app icon
-  static void removeBadge() {
-    _channel.invokeMethod('removeBadge');
+  static Future<void> removeBadge() async {
+    await _channel.invokeMethod('removeBadge');
   }
 
   /// Check if app badge is supported
