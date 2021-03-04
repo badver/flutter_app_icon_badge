@@ -17,13 +17,13 @@ class FlutterAppIconBadge {
 
   /// Check if app badge is supported
   static Future<bool> isAppBadgeSupported() async {
-    bool appBadgeSupported = await _channel.invokeMethod('isAppBadgeSupported');
-    return appBadgeSupported;
+    bool? appBadgeSupported = await _channel.invokeMethod('isAppBadgeSupported');
+    return appBadgeSupported ?? false;
   }
 
   /// Check if app window is focused.
   static Future<bool> isAppFocused() async {
-    bool isAppFocused = await _channel.invokeMethod('isAppFocused');
-    return isAppFocused;
+    bool? isAppFocused = await _channel.invokeMethod('isAppFocused');
+    return isAppFocused ?? false;
   }
 }
