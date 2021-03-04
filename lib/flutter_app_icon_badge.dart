@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 
 class FlutterAppIconBadge {
-  static const MethodChannel _channel = const MethodChannel('flutter_app_icon_badge');
+  static const MethodChannel _channel =
+      const MethodChannel('flutter_app_icon_badge');
 
   /// Change badge on app icon
   static Future<void> updateBadge(int count) async {
@@ -17,7 +18,8 @@ class FlutterAppIconBadge {
 
   /// Check if app badge is supported
   static Future<bool> isAppBadgeSupported() async {
-    bool? appBadgeSupported = await _channel.invokeMethod('isAppBadgeSupported');
+    bool? appBadgeSupported =
+        await _channel.invokeMethod('isAppBadgeSupported');
     return appBadgeSupported ?? false;
   }
 

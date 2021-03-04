@@ -73,7 +73,7 @@ class _MyAppState extends State<MyApp> {
                 onPressed: () {
                   Future.delayed(Duration(seconds: 5), () async {
                     final isFocused = await FlutterAppIconBadge.isAppFocused();
-                    setState((){
+                    setState(() {
                       _isFocused = isFocused;
                     });
                   });
