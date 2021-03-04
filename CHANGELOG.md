@@ -1,3 +1,7 @@
+## [1.1.0]
+
+* Null-safety
+
 ## [1.0.1]
 
 * All methods return Future
