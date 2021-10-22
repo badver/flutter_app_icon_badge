@@ -24,10 +24,21 @@ public class SwiftFlutterAppIconBadgePlugin: NSObject, FlutterPlugin {
             result(FlutterError.init(code: "bad args", message: nil, details: nil))
           }
         case "removeBadge":
-          UIApplication.shared.applicationIconBadgeNumber = 0
+            UNUserNotificationCenter.current().requestAuthorization(options: .badge){
+              (granted, error) in
+                if error == nil {
+                    UIApplication.shared.applicationIconBadgeNumber = 0
+                }
+            }
           result(nil)
         case "isAppBadgeSupported":
-          result(true)
+        var isSupported:Bool = false
+            UNUserNotificationCenter.current().requestAuthorization(options: .badge){
+              (granted, error) in
+                isSupported = (error == nil)
+            }
+
+          result(isSupported)
         default:
           result(FlutterMethodNotImplemented)
     }
