@@ -13,7 +13,12 @@ public class SwiftFlutterAppIconBadgePlugin: NSObject, FlutterPlugin {
         case "updateBadge":
           if let args = call.arguments as? Dictionary<String, Any>,
             let count = args["count"] as? Int {
-            UIApplication.shared.applicationIconBadgeNumber = count
+            UNUserNotificationCenter.current().requestAuthorization(options: .badge){ 
+              (granted, error) in
+                if error == nil {
+                  UIApplication.shared.applicationIconBadgeNumber = count
+                }
+            }
             result(nil)
           } else {
             result(FlutterError.init(code: "bad args", message: nil, details: nil))
