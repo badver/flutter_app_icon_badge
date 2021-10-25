@@ -15,7 +15,7 @@ public class SwiftFlutterAppIconBadgePlugin: NSObject, FlutterPlugin {
          let count = args["count"] as? Int
       {
         requestAuthorization(onSuccess: {
-            UIApplication.shared.applicationIconBadgeNumber = count
+          UIApplication.shared.applicationIconBadgeNumber = count
         })
 
         result(nil)
@@ -29,7 +29,7 @@ public class SwiftFlutterAppIconBadgePlugin: NSObject, FlutterPlugin {
       result(nil)
     case "isAppBadgeSupported":
       result(true)
-      
+
     default:
       result(FlutterMethodNotImplemented)
     }
@@ -38,41 +38,21 @@ public class SwiftFlutterAppIconBadgePlugin: NSObject, FlutterPlugin {
   func requestAuthorization(onSuccess: @escaping () -> Void) {
     if #available(iOS 10, *) {
       let center = UNUserNotificationCenter.current()
-      center.requestAuthorization(options: [.alert, .badge, .sound]) { _, _ in
+      center.requestAuthorization(options: [.badge]) { granted, _ in
+        if granted {
           DispatchQueue.main.async {
-              // run in main thread
-              onSuccess()
-          }
-      }
-    } else {
-      let notificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-      UIApplication.shared.registerUserNotificationSettings(notificationSettings)
-        DispatchQueue.main.async {
             // run in main thread
             onSuccess()
+          }
         }
-
+      }
+    } else {
+      let notificationSettings = UIUserNotificationSettings(types: [.badge], categories: nil)
+      UIApplication.shared.registerUserNotificationSettings(notificationSettings)
+      DispatchQueue.main.async {
+        // run in main thread
+        onSuccess()
+      }
     }
   }
-
-  // func handle(_ call: FlutterMethodCall?, result: FlutterResult) {
-  //     enableNotifications()
-
-  //     if "updateBadge" == call?.method {
-  //         let args = call?.arguments
-  //         let count = args?["count"] as? NSNumber
-  //         UIApplication.shared.applicationIconBadgeNumber = count?.intValue ?? 0
-  //         result(nil)
-  //     } else if "removeBadge" == call?.method {
-  //         UIApplication.shared.applicationIconBadgeNumber = 0
-  //         result(nil)
-  //     } else if "isAppBadgeSupported" == call?.method {
-  //         result(NSNumber(value: true))
-
-  //     } else if "isAppBadgeAllowed" == call?.method{
-  //       result(enableNotifications())
-  //     } else {
-  //         result(FlutterMethodNotImplemented)
-  //     }
-  // }
 }
